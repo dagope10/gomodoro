@@ -1,0 +1,48 @@
+# .goreleaser.yml
+version: 1
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  -
+    # El nombre del binario que quieres generar.
+    binary: gomo
+    # El punto de entrada de tu aplicación.
+    main: ./main.go
+    # Compila para los sistemas operativos y arquitecturas más comunes.
+    goos:
+      - linux
+      - windows
+      - darwin # (macOS)
+    goarch:
+      - amd64
+      - arm64
+    # Optimiza el binario para que sea más pequeño.
+    ldflags:
+      - -s -w
+
+# Define cómo se van a comprimir los binarios.
+archives:
+  -
+    # Formato del nombre de los archivos comprimidos (ej: gomodoro_1.0.0_linux_amd64.tar.gz)
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    # Añade archivos de texto importantes al paquete.
+    files:
+      - README.md
+      - LICENSE
+
+# Crea un archivo con las sumas de verificación de todos los paquetes.
+checksum:
+  name_template: 'checksums.txt'
+
+# Genera las notas de la versión (changelog) automáticamente a partir de tus commits.
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - 'Merge pull request'
+      - 'Merge branch'
