@@ -31,7 +31,6 @@ archives:
     # Añade archivos de texto importantes al paquete.
     files:
       - README.md
-      - LICENSE
 
 # Crea un archivo con las sumas de verificación de todos los paquetes.
 checksum:

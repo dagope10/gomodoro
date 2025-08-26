@@ -1,3 +1,5 @@
 pomo
 gomo
 pomodoro_config.json
+# Added by goreleaser init:
+dist/
